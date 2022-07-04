@@ -1,9 +1,79 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>consensus</title>
-    </head>
-    <body>
-        consensus
-    </body>
+<head>
+    <title>Domain Consensus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <style>
+        body {
+            font-family: monospace;
+            margin: 0;
+            padding: 0;
+            background: #f8f4f0;
+            font-size: 19px;
+        }
+        #main {
+            max-width: 640px;
+            background: white;
+            margin: 20px;
+            padding: 25px;
+            border-radius: 3px;
+            border: solid thin #eee;
+            box-shadow: 5px 5px 30px 4px #dedede;
+        }
+        #sponsor {
+            background: #ddffee;
+            padding: 10px;
+        }
+        #sponsor button {
+            padding: 8px 10px;
+            border-radius: 4px;
+            border: solid thin green;
+            cursor: pointer;
+        }
+        #sponsor button:hover {
+            border: solid thin lightgreen;
+        }
+
+        .ads-opt-in-inline {
+            display: none;
+        }
+
+        .ads-opt-in .ads-opt-in-hide {
+            display: none;
+        }
+        .ads-opt-in .ads-opt-in-inline {
+            display: inline;
+        }
+    </style>
+    <script>
+        function showAds() {
+            document.body.classList.add("ads-opt-in")
+        }
+    </script>
+</head>
+<body>
+    <div id="main">
+        <h1>Domain Consensus</h1>
+        <p>
+            <strong>Insights from newly registered domains.</strong>
+        </p>
+        <p>
+            Registration of a domain name represents an intention to enguage
+            with people around a particular message. The purchasing of a new
+            domain represents a the buyers insight and investment into the value
+            of their message.
+        </p>
+        <div id="sponsor">
+            Domain Consensus is Free.
+            <span id="sponsor-turn-on" class="ads-opt-in-hide">
+                <button onclick="showAds();">Turn on Ads</button>
+                to help us out.
+            </span>
+            <span class="ads-opt-in-inline">
+                Thanks!<br/>Please consider one of of our sponsors below.
+            </span>
+        </div>
+    </div>
+</body>
 </html>
