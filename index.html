@@ -58,6 +58,9 @@
     <script>
         function showAds() {
             document.body.classList.add("ads-opt-in")
+            var ad_el = document.getElementById("ad")
+            ad_el.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8311301439241235" data-ad-slot="4833581514" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+            (adsbygoogle = window.adsbygoogle || []).push({});
         }
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8311301439241235"
@@ -75,15 +78,15 @@
             Consensus is about tracking the value of messages over time.
         </p>
         <div id="sponsor">
-            Domain Consensus is Free.
+            <span class="ads-opt-in-hide">Domain Consensus is Free.</span>
             <span id="sponsor-turn-on" class="ads-opt-in-hide">
                 <button onclick="showAds();">Turn on Ads</button>
                 to help us out.
             </span>
             <span class="ads-opt-in-inline">
-                Thanks!<br/>Please consider one of of our sponsors below.
+                Thanks!<br/>
             </span>
-            <div class="ads-opt-in-block">
+            <div id="ad" class="ads-opt-in-block">
                 <i>Ad content here</i>
             </div>
         </div>
