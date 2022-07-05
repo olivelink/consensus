@@ -106,6 +106,34 @@
         var chartCtx = null;
         var myChart = null;
 
+        function loadCrypto() {
+            document.body.classList.add("chart-loading");
+            chartCtx = document.getElementById('myChart');
+            if (myChart !== null) {
+                myChart.destroy();
+            }
+            axios.get("/data/crypto.json").then(function (resp) {
+                console.log(resp.data);
+                myChart = new Chart(chartCtx, {
+                    type: "line",
+                    data: {
+                        labels: resp.data[0],
+                        datasets:[
+                            {
+                                label: "Crypto",
+                                data: resp.data[1],
+                                borderColor: 'rgb(75, 192, 192)',
+                            },
+                        ],
+                    },
+                });
+
+                document.body.classList.remove("chart-loading");
+            })
+            modals.openModal( null, '#modal' );
+            return false;
+        }
+
         function loadChart(stem, hash) {
             document.body.classList.add("chart-loading");
             chartCtx = document.getElementById('myChart');
@@ -122,6 +150,7 @@
                             {
                                 label: stem,
                                 data: resp.data[1],
+                                borderColor: 'rgb(75, 192, 192)',
                             },
                         ],
                     },
@@ -209,8 +238,15 @@
             </div>
         </div>
         <hr/>
+        <h2>Topics in Newly Registered Domains</h2>
+        <p>Trends on groups of terms as they appeare in newly registered domains.</p>
+        <ul>
+            <li><a href="#" onclick="loadCrypto()">Cryptocurrency and Bitcoin</a></li>
+        </ul>
+
+        <hr/>
         <h2>Word Stems in Newly Registered Domains</h2>
-        <p>Word stem occurances found in domains registered today (5th July 2022)</p>
+        <p>Word stem score from occurances found in domains registered today (5th July 2022)</p>
         <table>
             <thead>
                 <tr>
