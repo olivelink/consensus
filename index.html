@@ -9,7 +9,7 @@
             font-family: monospace;
             margin: 0;
             padding: 0;
-            background: #f8f4f0;
+            background: #a09f9d;
             font-size: 19px;
         }
         #main {
@@ -19,7 +19,7 @@
             padding: 25px;
             border-radius: 3px;
             border: solid thin #eee;
-            box-shadow: 5px 5px 30px 4px #dedede;
+            box-shadow: 5px 5px 30px 4px #676665;
         }
         #sponsor {
             background: #ddffee;
@@ -243,6 +243,9 @@
         <ul>
             <li><a href="#" onclick="loadCrypto()">Cryptocurrency and Bitcoin</a></li>
         </ul>
+        <p>
+            Suggest new topics using the feedback widget.
+        </p>
 
         <hr/>
         <h2>Word Stems in Newly Registered Domains</h2>
@@ -272,8 +275,42 @@
             </div>
         </div>
     </div>
+    <script id="uservitals-feedback-loader" async src="https://getfeedbackwidget.com/feedback/loader.js"></script>
     <script>
-       //modals.init();
+        const script = document.getElementById("uservitals-feedback-loader");
+        script.addEventListener("load", (event) => {
+            window.UVFeedbackWidget.init({
+                team: '1fa7f7a6-d558-4e3e-b926-c48a5d1bf312',
+                mode: "floating",
+                align: "right",
+                position: "top",
+                title: "Help improve our product",
+                subtitle: "What feedback do you have?",
+                buttons: [
+                    {
+                        title: "Feature Request",
+                        subtitle: "Have a feature idea? ",
+                        color: "blue",
+                        labels: ["Idea"],
+                        placeholder: "Describe your use case and any additional details our team needs to know."
+                    },
+                    {
+                        title: "Bug Report",
+                        subtitle: "Report an issue",
+                        color: "red",
+                        labels: ["Bug"],
+                        placeholder: "Describe your use case and any additional details our team needs to know."
+                    },
+                    {
+                        title: "Suggest Topic",
+                        subtitle: "Suggest a topic to track",
+                        color: "purple",
+                        labels: ["Idea"],
+                        placeholder: "Suggest a group of terms to track as a topic on Domain Consensus"
+                    }
+                ]
+            });
+        });
     </script>
 </body>
 </html>
