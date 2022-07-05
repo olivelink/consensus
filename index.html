@@ -30,6 +30,7 @@
             border-radius: 4px;
             border: solid thin green;
             cursor: pointer;
+            margin-top: 10px;
         }
         #sponsor button:hover {
             border: solid thin lightgreen;
@@ -49,12 +50,51 @@
             display: block;
         }
 
+        table {
+            width: 100%;
+        }
+
+        table th {
+            text-align: center;
+        }
+
         table th, table td {
             background: #eeeeee;
             padding: 3px;
-            text-align: center;
+            border: solid thick white;
+        }
+
+        #stems-index td {
+            text-align: right;
+        }
+
+        #stems-index td.stems-index-stem {
+            text-align: left;
+            color: #002288;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .chart-loading-show {
+            display: none;
+        }
+        .chart-loading-hide {
+            display: block;
+        }
+        .chart-loading .chart-loading-show  {
+            display: block;
+        }
+        .chart-loading .chart-loading-hide {
+            display: none;
         }
     </style>
+    <link rel="stylesheet" href="/modals.min.css">
+    <script src="/modals.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8311301439241235"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         function showAds() {
             document.body.classList.add("ads-opt-in")
@@ -62,9 +102,87 @@
             ad_el.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8311301439241235" data-ad-slot="4833581514" data-ad-format="auto" data-full-width-responsive="true"></ins>';
             (adsbygoogle = window.adsbygoogle || []).push({});
         }
+
+        var chartCtx = null;
+        var myChart = null;
+
+        function loadChart(stem, hash) {
+            document.body.classList.add("chart-loading");
+            chartCtx = document.getElementById('myChart');
+            if (myChart !== null) {
+                myChart.destroy();
+            }
+            axios.get("/data/" + hash + ".json").then(function (resp) {
+                console.log(resp.data);
+                myChart = new Chart(chartCtx, {
+                    type: "line",
+                    data: {
+                        labels: resp.data[0],
+                        datasets:[
+                            {
+                                label: stem,
+                                data: resp.data[1],
+                            },
+                        ],
+                    },
+                });
+
+                document.body.classList.remove("chart-loading");
+            })
+            modals.openModal( null, '#modal' );
+            return false;
+        }
+
+        function closeChart() {
+            modals.closeModal();
+        }
+
+        function loadMeta() {
+            axios.get("/data/meta.json").then(function (res) {
+                console.log(res.data)
+
+                var stemsIndexEl = document.getElementById("stems-index")
+
+                for(var i = 0; i < res.data.length; i++) {
+                    var row = res.data[i]
+                    var rowEl = document.createElement("tr")
+
+                    var labelEl = document.createElement("td", )
+                    labelEl.classList.add("stems-index-stem")
+                    labelEl.appendChild(
+                        document.createTextNode(row.stem)
+                    )
+                    const stem = row.stem;
+                    const hashed = row.hashed
+                    labelEl.onclick = function(ev) {
+                        loadChart(stem, hashed);
+                        return false;
+                    }
+
+                    var changeEl = document.createElement("td", )
+                    changeEl.classList.add("stems-index-change")
+                    changeEl.appendChild(
+                        document.createTextNode(row.change.toFixed(2))
+                    )
+
+                    var scoreTodayEl = document.createElement("td", )
+                    scoreTodayEl.classList.add("stems-index-score-today")
+                    scoreTodayEl.appendChild(
+                        document.createTextNode((row.score_today * 10000).toFixed(2))
+                    )
+
+                    rowEl.appendChild(labelEl)
+                    rowEl.appendChild(changeEl)
+                    rowEl.appendChild(scoreTodayEl)
+                    stemsIndexEl.appendChild(rowEl)
+                }
+
+            })
+
+        }
+
+        loadMeta()
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8311301439241235"
-    crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="main">
@@ -80,7 +198,7 @@
         <div id="sponsor">
             <span class="ads-opt-in-hide">Domain Consensus is Free.</span>
             <span id="sponsor-turn-on" class="ads-opt-in-hide">
-                <button onclick="showAds();">Turn on Ads</button>
+                <br/><button onclick="showAds();">Show sponsored link</button>
                 to help us out.
             </span>
             <span class="ads-opt-in-inline">
@@ -91,78 +209,35 @@
             </div>
         </div>
         <hr/>
-        <h2>English Words Leader Board</h2>
-        <p>Word occurances found in domains registered today (5th July 2022)</p>
+        <h2>Word Stems in Newly Registered Domains</h2>
+        <p>Word stem occurances found in domains registered today (5th July 2022)</p>
         <table>
             <thead>
                 <tr>
                     <th>
-                        Word
+                        Word Stem
                     </th>
                     <th>
-                        Occurances
+                        Change
+                    </th>
+                    <th>
+                        Score
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        today
-                    </td>
-                    <td>
-                        1936
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        line
-                    </td>
-                    <td>
-                        880
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        port
-                    </td>
-                    <td>
-                        839
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        shop
-                    </td>
-                    <td>
-                        754
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        tech
-                    </td>
-                    <td>
-                        663
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        home
-                    </td>
-                    <td>
-                        646
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        service
-                    </td>
-                    <td>
-                        557
-                    </td>
-                </tr>
+            <tbody id="stems-index">
             </tbody>
         </table>
+        <div class="modal" data-modal-window id="modal">
+            <a class="close" onclick="closeChart()">x</a>
+            <p class="chart-loading-show">Loading...</p>
+            <div class="chart-loading-hide">
+                <canvas id="myChart" width="400" height="100"></canvas>
+            </div>
+        </div>
     </div>
+    <script>
+       //modals.init();
+    </script>
 </body>
 </html>
