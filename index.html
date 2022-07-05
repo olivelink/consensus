@@ -9,7 +9,7 @@
             font-family: monospace;
             margin: 0;
             padding: 0;
-            background: #a09f9d;
+            background: #e1ded7;
             font-size: 19px;
         }
         #main {
@@ -275,42 +275,14 @@
             </div>
         </div>
     </div>
-    <script id="uservitals-feedback-loader" async src="https://getfeedbackwidget.com/feedback/loader.js"></script>
     <script>
-        const script = document.getElementById("uservitals-feedback-loader");
-        script.addEventListener("load", (event) => {
-            window.UVFeedbackWidget.init({
-                team: '1fa7f7a6-d558-4e3e-b926-c48a5d1bf312',
-                mode: "floating",
-                align: "right",
-                position: "top",
-                title: "Help improve our product",
-                subtitle: "What feedback do you have?",
-                buttons: [
-                    {
-                        title: "Feature Request",
-                        subtitle: "Have a feature idea? ",
-                        color: "blue",
-                        labels: ["Idea"],
-                        placeholder: "Describe your use case and any additional details our team needs to know."
-                    },
-                    {
-                        title: "Bug Report",
-                        subtitle: "Report an issue",
-                        color: "red",
-                        labels: ["Bug"],
-                        placeholder: "Describe your use case and any additional details our team needs to know."
-                    },
-                    {
-                        title: "Suggest Topic",
-                        subtitle: "Suggest a topic to track",
-                        color: "purple",
-                        labels: ["Idea"],
-                        placeholder: "Suggest a group of terms to track as a topic on Domain Consensus"
-                    }
-                ]
-            });
-        });
+        window.onUsersnapCXLoad = function(api) {
+          api.init();
+        }
+        var script = document.createElement('script');
+        script.defer = 1;
+        script.src = 'https://widget.usersnap.com/global/load/04e1e646-0d4b-4733-837a-c39128f09450?onload=onUsersnapCXLoad';
+        document.getElementsByTagName('head')[0].appendChild(script);
     </script>
 </body>
 </html>
