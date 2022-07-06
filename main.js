@@ -1,14 +1,6 @@
 
         function showAds() {
             document.body.classList.add("ads-opt-in")
-
-            var scriptEl = document.createElement('script');
-            scriptEl.type = 'text/javascript';
-            scriptEl.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8311301439241235';
-            scriptEl.setAttribute("async", "yes")
-            scriptEl.setAttribute("crossorigin", "anonymous")
-            document.getElementsByTagName('head')[0].appendChild(scriptEl);
-
             var ad_el = document.getElementById("ad")
             ad_el.innerHTML = (
                 '\
