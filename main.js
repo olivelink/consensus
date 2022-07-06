@@ -1,7 +1,6 @@
 
         function showAds() {
             document.body.classList.add("ads-opt-in")
-            var ad_el = document.getElementById("ad")
 
             var scriptEl = document.createElement('script');
             scriptEl.type = 'text/javascript';
@@ -9,6 +8,8 @@
             scriptEl.setAttribute("async", "yes")
             scriptEl.setAttribute("crossorigin", "anonymous")
             document.getElementsByTagName('head')[0].appendChild(scriptEl);
+
+            var ad_el = document.getElementById("ad")
             ad_el.innerHTML = (
                 '\
                     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8311301439241235" data-ad-slot="4833581514" data-ad-format="auto" data-full-width-responsive="true"></ins> \
