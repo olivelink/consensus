@@ -41,6 +41,33 @@
             return false;
         }
 
+        function loadDentist() {
+            document.body.classList.add("chart-loading");
+            chartCtx = document.getElementById('myChart');
+            if (myChart !== null) {
+                myChart.destroy();
+            }
+            axios.get("/data/dentist.json").then(function (resp) {
+                console.log(resp.data);
+                myChart = new Chart(chartCtx, {
+                    type: "line",
+                    data: {
+                        labels: resp.data[0],
+                        datasets:[
+                            {
+                                label: "Dentist",
+                                data: resp.data[1],
+                                borderColor: 'rgb(75, 192, 192)',
+                            },
+                        ],
+                    },
+                });
+
+                document.body.classList.remove("chart-loading");
+            })
+            modals.openModal( null, '#modal' );
+            return false;
+        }
         function loadChart(stem, hash) {
             document.body.classList.add("chart-loading");
             chartCtx = document.getElementById('myChart');
