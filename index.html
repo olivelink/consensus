@@ -63,6 +63,28 @@
             border: solid thick white;
         }
 
+        .topic-item {
+            background: #f3f3f9;
+            border: #eee;
+            cursor: pointer;
+            padding: 8px;
+            margin: 8px 0;
+        }
+
+        .topic-item:hover {
+            background: #eee;
+        }
+
+        .topic-item h3 {
+            text-decoration: underline;
+            color: #002288;
+            margin: 0;
+        }
+
+        .topic-item p {
+            margin: 8px 0;
+        }
+
         #stems-index td {
             text-align: right;
         }
@@ -127,11 +149,7 @@
         <h2>Keyword Groups</h2>
         <p>Groups of keywords centered around a topic.</p>
 
-        <h3><a href="#" onclick="loadCrypto()">Cryptocurrency and Bitcoin</a></h3>
-        <p>Keywords: bitcoin, ethereum, crypto, blockchain</p>
-
-        <h3><a href="#" onclick="loadDentist()">Dentist</a></h3>
-        <p>Keywords: dentist, dental, tooth, teeth</p>
+        <div id="topic-index"></div>
 
         <h3>Add a Keyword Group</h3>
 
