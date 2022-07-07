@@ -1,5 +1,6 @@
 
 function showAds() {
+    return
     document.body.classList.add("ads-opt-in")
     var ad_el = document.getElementById("ad")
     ad_el.innerHTML = (
