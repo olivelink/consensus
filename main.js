@@ -56,7 +56,7 @@ function loadTopic(title, file) {
                 labels: resp.data[0],
                 datasets:[
                     {
-                        label: title,
+                        label: title + " - USD ($)",
                         data: resp.data[1],
                         borderColor: 'rgb(75, 192, 192)',
                     },
@@ -84,7 +84,7 @@ function loadChart(stem, hash) {
                 labels: resp.data[0],
                 datasets:[
                     {
-                        label: stem,
+                        label: stem + " - USD ($)",
                         data: resp.data[1],
                         borderColor: 'rgb(75, 192, 192)',
                     },
@@ -170,7 +170,7 @@ function loadMeta() {
             var scoreTodayEl = document.createElement("td", )
             scoreTodayEl.classList.add("stems-index-score-today")
             scoreTodayEl.appendChild(
-                document.createTextNode((row.score_today * 10000).toFixed(2))
+                document.createTextNode((row.score_today).toFixed(0))
             )
 
             rowEl.appendChild(labelEl)

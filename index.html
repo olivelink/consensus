@@ -63,6 +63,11 @@
             border: solid thick white;
         }
 
+        .hero td {
+            text-align: right;
+            font-size: 27px;
+        }
+
         .topic-item {
             background: #f3f3f9;
             border: #eee;
@@ -143,25 +148,38 @@
             and some domains are purchased with nefarious purposes,
             but in either case, they do so recognising a value.
         </p>
-        <h3>The Domain Consensus Score</h3>
-        <p>
-            Each day we analyse new domain purchases, tracking
-            the frequency of keywords. The domain consensus score is a relative
-            score proportional to the total number of domains purchased for
-            that day. Clicking on a keyword group or word-stem below will
-            show the change in score over time.
-        </p>
+        <hr/>
+        <h2>All Domains Globally</h2>
+        <p>Summary of newly purchased domains.</p>
+        <table class="hero">
+            <thead>
+                <tr>
+                    <th style="background-color: transparent;"></th>
+                    <th>Total Domains</th>
+                    <th>USD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: left">Yesterday</td>
+                    <td>217,256</td>
+                    <td>$ 1,303,536</td>
+                </tr>
+            </tbody>
+        </table>
         <hr/>
         <h2>Keyword Groups</h2>
-        <p>Groups of keywords centered around a topic.</p>
+        <p>
+            Daily spend on domains grouped by common keywords. Use the feedback widget
+            to suggest a group of keywords you are interested in.
+        </p>
 
         <div id="topic-index"></div>
 
-        <h3>Add a Keyword Group</h3>
-
+        <h3>Keyword group missing?</h3>
         <p>
-            Currenly done by hand with love - 
-            suggest a new keyword group using the feedback widget.
+            Use the feedback widget
+            to suggest a group of keywords you are interested in.
         </p>
 
         <div id="ad" class="ads-opt-in-block">
@@ -171,8 +189,8 @@
         <hr/>
         <h2>Word Stems Leader Board</h2>
         <p>
-            A score of the frequency of word stem occurances. Showing
-            word stems that are at least 4 letters.
+            Top word stems by value spent. Click on a word
+            stem to see the daily trend.
         </p>
         <table>
             <thead>
@@ -181,10 +199,10 @@
                         Word Stem
                     </th>
                     <th>
-                        Change
+                        Change (%)
                     </th>
                     <th>
-                        Score
+                        USD ($)
                     </th>
                 </tr>
             </thead>
