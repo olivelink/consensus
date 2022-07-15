@@ -95,6 +95,7 @@ function loadChart(stem, hash) {
         document.body.classList.remove("chart-loading");
     })
     modals.openModal( null, '#modal' );
+    (adsbygoogle = window.adsbygoogle || []).push({});
     return false;
 }
 
